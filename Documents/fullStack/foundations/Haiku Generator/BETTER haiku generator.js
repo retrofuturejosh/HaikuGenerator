@@ -135,6 +135,8 @@ function createHaiku(text, obj, markovObj){
     let sevenLineObj = getLineKeys(sevenLineArr);
     let lineOne = (fiveLineArr[randomInt(0, fiveLineArr.length-1)]);
 
+    //uses markov chain to start next line of haiku with a word that chains from the last word of the previous line
+    //if no line fits criteria, a random line is generated
     let lineArr = lineOne.split(' ');
     let lastWord = lineArr[lineArr.length-1].toUpperCase();
     if (markovObj[lastWord]){
@@ -144,6 +146,7 @@ function createHaiku(text, obj, markovObj){
         } else lineTwo = sevenLineArr[randomInt(0, sevenLineArr.length-1)];
     } else lineTwo = sevenLineArr[randomInt(0, sevenLineArr.length-1)];
 
+    //same process as line 2
     lineArr = lineTwo.split(' ');
     lastWord = lineArr[lineArr.length-1].toUpperCase();
     if (markovObj[lastWord]){
@@ -152,7 +155,6 @@ function createHaiku(text, obj, markovObj){
             lineThree = fiveLineObj[nextWord][randomInt(0, fiveLineObj[nextWord].length-1)]
         } else lineThree = fiveLineArr[randomInt(0, fiveLineArr.length-1)];
     } else lineThree = fiveLineArr[randomInt(0, fiveLineArr.length-1)];
-
 
     haikuArr.push(lineOne);
     haikuArr.push(lineTwo);
